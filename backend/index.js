@@ -11,6 +11,7 @@ const cors = require("cors");
 // If the Content-Type is application/json, the middleware parses the JSON data in the request body and constructs a JavaScript object from it.
 // The resulting object is then attached to the req.body property, making it accessible to subsequent middleware functions or route handlers.
 app.use(express.json());
+app.use(express.static("build"));
 
 // Create custom token
 morgan.token("reqBody", (req, res) => {
@@ -50,9 +51,9 @@ let persons = [
 ];
 
 // Response.send will not convert non-objects to JSON, unlike Response.json
-app.get("/", (request, response) => {
-  response.send("<h1>Hello World!</h1>");
-});
+// app.get("/", (request, response) => {
+//   response.send("<h1>Hello World!</h1>");
+// });
 
 app.get("/api/info", (request, response) => {
   const numPeople = persons.length;
