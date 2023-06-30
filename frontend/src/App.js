@@ -76,12 +76,17 @@ const App = () => {
     } else if (persons.some((person) => person.number === newNumber)) {
       alert(`${newNumber} is already added to phone book`);
     } else {
-      personService.create(personObj).then((response) => {
-        setPersons(persons.concat(response));
-        setNewName("");
-        setNewNumber("");
-        displayNotif(`Added ${response.name}`);
-      });
+      personService
+        .create(personObj)
+        .then((response) => {
+          setPersons(persons.concat(response));
+          setNewName("");
+          setNewNumber("");
+          displayNotif(`Added ${response.name}`);
+        })
+        .catch((error) => {
+          console.log(error.response.data.error);
+        });
       // axios
       //   .post("http://localhost:3001/persons", personObj)
       //   .then((response) => {
